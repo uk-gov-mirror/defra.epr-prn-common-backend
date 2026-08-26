@@ -848,6 +848,38 @@ public class RepositoryTestsInMemory
     }
 
     [TestMethod]
+    public async Task SavePrnDetails_WhenAcceptedPrnIsCancelled_UpdatesStatusAndHistory()
+    {
+        var acceptedPrn = await _context.Prn.FirstAsync(CancellationToken.None);
+        acceptedPrn.PrnStatusId = (int)EprnStatus.ACCEPTED;
+        acceptedPrn.StatusUpdatedOn = DateTime.UtcNow.AddDays(-1);
+        await _context.SaveChangesAsync(CancellationToken.None);
+
+        var cancelledPrn = await _context
+            .Prn.AsNoTracking()
+            .SingleAsync(prn => prn.Id == acceptedPrn.Id, CancellationToken.None);
+        cancelledPrn.PrnStatusId = (int)EprnStatus.CANCELLED;
+        cancelledPrn.StatusUpdatedOn = DateTime.UtcNow;
+
+        await _repository.SavePrnDetails(cancelledPrn);
+
+        var updatedPrn = await _context.Prn.SingleAsync(
+            prn => prn.Id == acceptedPrn.Id,
+            CancellationToken.None
+        );
+        var statusHistory = await _context.PrnStatusHistory.SingleAsync(
+            history =>
+                history.PrnIdFk == acceptedPrn.Id
+                && history.PrnStatusIdFk == (int)EprnStatus.CANCELLED,
+            CancellationToken.None
+        );
+
+        updatedPrn.PrnStatusId.Should().Be((int)EprnStatus.CANCELLED);
+        updatedPrn.StatusUpdatedOn.Should().Be(cancelledPrn.StatusUpdatedOn);
+        statusHistory.Comment.Should().BeNull();
+    }
+
+    [TestMethod]
     [DataRow(EprnStatus.ACCEPTED)]
     [DataRow(EprnStatus.CANCELLED)]
     [DataRow(EprnStatus.REJECTED)]

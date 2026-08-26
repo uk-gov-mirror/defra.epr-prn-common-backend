@@ -86,6 +86,26 @@ public class PrnControllerV2Tests
         location.Should().Be("api/v1/prn/0");
     }
 
+    [TestMethod]
+    public async Task SaveAsync_WhenPrnIsCancelled_PassesCancelledStatusToService()
+    {
+        var model = DataGenerator.CreateValidSavePrnDetailsRequest();
+        model.PrnStatusId = (int)EprnStatus.CANCELLED;
+        _application
+            .PrnService.Setup(s => s.SaveEprnDetails(It.IsAny<Eprn>()))
+            .ReturnsAsync((Eprn e) => e);
+
+        await _client.CallPostEndpoint<SavePrnDetailsRequest, PrnDto>("api/v2/prn", model);
+
+        _application.PrnService.Verify(
+            service =>
+                service.SaveEprnDetails(
+                    It.Is<Eprn>(prn => prn.PrnStatusId == (int)EprnStatus.CANCELLED)
+                ),
+            Times.Once()
+        );
+    }
+
     private static string ToJsonWithoutField(object obj, string propertyName)
     {
         var jObj = JObject.FromObject(obj);
