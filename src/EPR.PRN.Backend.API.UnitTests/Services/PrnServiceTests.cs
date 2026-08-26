@@ -169,6 +169,38 @@ public class PrnServiceTests
     }
 
     [TestMethod]
+    public async Task UpdateStatus_WhenAcceptedPrnIsCancelled_UpdatesPrnAndStatusHistory()
+    {
+        var orgId = Guid.NewGuid();
+        var userId = Guid.NewGuid();
+        var availablePrns = _fixture.CreateMany<Eprn>(1).ToList();
+        var prnUpdate = new PrnUpdateStatusDto
+        {
+            PrnId = availablePrns[0].ExternalId,
+            Status = EprnStatus.CANCELLED,
+        };
+        PrnStatusHistory capturedHistory = null;
+
+        availablePrns[0].PrnStatusId = (int)EprnStatus.ACCEPTED;
+        _mockRepository.Setup(r => r.GetAllPrnByOrganisationId(orgId)).ReturnsAsync(availablePrns);
+        _mockRepository
+            .Setup(r => r.AddPrnStatusHistory(It.IsAny<PrnStatusHistory>()))
+            .Callback<PrnStatusHistory>(history => capturedHistory = history);
+
+        await _systemUnderTest.UpdateStatus(orgId, userId, [prnUpdate]);
+
+        availablePrns[0].PrnStatusId.Should().Be((int)EprnStatus.CANCELLED);
+        capturedHistory.Should().NotBeNull();
+        capturedHistory.PrnIdFk.Should().Be(availablePrns[0].Id);
+        capturedHistory.PrnStatusIdFk.Should().Be((int)EprnStatus.CANCELLED);
+        capturedHistory.CreatedByUser.Should().Be(userId);
+        _mockRepository.Verify(
+            repository => repository.SaveTransaction(It.IsAny<IDbContextTransaction>()),
+            Times.Once()
+        );
+    }
+
+    [TestMethod]
     public async Task UpdateStatus_ShouldThrowsConflictExceptionIfSamePrnIsTriedToUpdateMultiple()
     {
         var orgId = Guid.NewGuid();

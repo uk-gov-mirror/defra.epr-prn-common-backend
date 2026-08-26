@@ -154,6 +154,10 @@ public class PrnService(
             if (
                 prn!.PrnStatusId == (int)EprnStatus.AWAITINGACCEPTANCE
                 || prn!.PrnStatusId == (int)prnUpdate.Status
+                || (
+                    prn!.PrnStatusId == (int)EprnStatus.ACCEPTED
+                    && prnUpdate.Status == EprnStatus.CANCELLED
+                )
             )
             {
                 UpdatePrn(userId, prnUpdate, prn);
