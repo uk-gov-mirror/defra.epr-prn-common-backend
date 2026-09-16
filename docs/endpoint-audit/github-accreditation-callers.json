@@ -1,0 +1,865 @@
+{
+  "date": "2026-09-16",
+  "api_commit": "c1c250c08da94663a64dc84eb7b18c23ad9b9c5c",
+  "config_commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+  "summary": {
+    "endpoints_reviewed": 12,
+    "executable_facade_callers_found": 12,
+    "frontend_roots_found": 11,
+    "upstream_roots_unresolved": 1,
+    "production_usage_verified": false
+  },
+  "repositories": [
+    {
+      "repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "branch": "main",
+      "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2"
+    },
+    {
+      "repository": "DEFRA/epr-prn-rep-exp-facade",
+      "branch": "main",
+      "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75"
+    }
+  ],
+  "notes": [
+    "GitHub discovery was followed by direct inspection of the two main-branch source snapshots. All code references are immutable commit links.",
+    "Broad discovery queries reached the result limit. Search is not exhaustive across all repositories, branches or historical releases; negative results are not proof of absence.",
+    "All 12 backend contracts have executable facade callers. Eleven have UI roots; the overview chain stops at the facade API.",
+    "Frontend v1.0 spelling and route casing map to API version 1.0 and the same ASP.NET routes.",
+    "The frontend and facade have additional feature gates. Source defaults are true; PRD1 deployment and effective values have not been read.",
+    "Configuration files exist for shared DEV, DEV8, DEV15 and TST1 resources 416/417, but not PRD1 or PRE in the supplied snapshot. Deployment YAML names are not evidence of deployment.",
+    "A clear-down-database QA call is also present but has no corresponding route in the audited backend; it is outside these 12 contracts and was not executed."
+  ],
+  "endpoints": [
+    {
+      "method": "GET",
+      "route": "/api/v1/Accreditation/{organisationId}/{materialId}/{applicationTypeId}",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "root_status": "UI root found",
+      "journey": "EnsureAccreditation: start or resume an application",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 86,
+          "label": "UI controller invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L86"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs",
+          "line": 21,
+          "label": "Frontend HTTP service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs#L21"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs",
+          "line": 23,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs#L23"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs",
+          "line": 16,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs#L16"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs",
+          "line": 26,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs#L26"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 21,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L21"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/Accreditation/{accreditationId}",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "root_status": "UI root found",
+      "journey": "PrnTonnage and other application pages: load accreditation",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 123,
+          "label": "UI controller invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L123"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs",
+          "line": 40,
+          "label": "Frontend HTTP service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs#L40"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs",
+          "line": 36,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs#L36"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs",
+          "line": 24,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs#L24"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs",
+          "line": 33,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs#L33"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 22,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L22"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/Accreditation",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "root_status": "UI root found",
+      "journey": "PrnTonnage POST and other application steps: save accreditation",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 161,
+          "label": "UI controller invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L161"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs",
+          "line": 60,
+          "label": "Frontend HTTP service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs#L60"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs",
+          "line": 44,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs#L44"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs",
+          "line": 29,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs#L29"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs",
+          "line": 40,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs#L40"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 23,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L23"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/Accreditation/Files/{externalId}",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "root_status": "UI root found",
+      "journey": "FileDownload and DeleteUploadedFile: read file metadata",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 710,
+          "label": "UI controller invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L710"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs",
+          "line": 109,
+          "label": "Frontend HTTP service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs#L109"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs",
+          "line": 64,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs#L64"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs",
+          "line": 41,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs#L41"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs",
+          "line": 56,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs#L56"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 28,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L28"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/Accreditation/{accreditationId}/Files/{fileUploadTypeId}/{fileUploadStatusId?}",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "root_status": "UI root found",
+      "journey": "TaskList and SamplingAndInspectionPlan: list evidence files",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 475,
+          "label": "TaskList root",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L475"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 1346,
+          "label": "UI controller invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L1346"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs",
+          "line": 129,
+          "label": "Frontend HTTP service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs#L129"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs",
+          "line": 73,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs#L73"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs",
+          "line": 46,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs#L46"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs",
+          "line": 62,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs#L62"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 29,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L29"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/Accreditation/{accreditationId}/Files",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "root_status": "UI root found",
+      "journey": "SamplingAndInspectionPlan: save completed upload metadata",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 606,
+          "label": "UI controller invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L606"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs",
+          "line": 149,
+          "label": "Frontend HTTP service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs#L149"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs",
+          "line": 81,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs#L81"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs",
+          "line": 52,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs#L52"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs",
+          "line": 69,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs#L69"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 30,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L30"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    },
+    {
+      "method": "DELETE",
+      "route": "/api/v1/Accreditation/{accreditationId}/Files/{fileId}",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "root_status": "UI root found",
+      "journey": "DeleteUploadedFile: remove uploaded evidence",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 740,
+          "label": "UI controller invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L740"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs",
+          "line": 166,
+          "label": "Frontend HTTP service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs#L166"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs",
+          "line": 89,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs#L89"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs",
+          "line": 58,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs#L58"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs",
+          "line": 76,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs#L76"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 31,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L31"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/Accreditation/accreditations/{organisationId:guid}/overview",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": null,
+      "root_status": "Upstream root unresolved; facade API entry point found",
+      "journey": "Facade GET /api/v1/Accreditation/{organisationId}/overview; upstream root unresolved",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs",
+          "line": 98,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs#L98"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs",
+          "line": 63,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationService.cs#L63"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs",
+          "line": 83,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationServiceClient.cs#L83"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 32,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L32"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/AccreditationPRNIssueAuth/{accreditationId}",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "root_status": "UI root found",
+      "journey": "SelectAuthority and TaskList: show authorised PRN issuers",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 181,
+          "label": "UI controller invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L181"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs",
+          "line": 75,
+          "label": "Frontend HTTP service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs#L75"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationPrnIssueAuthController.cs",
+          "line": 20,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationPrnIssueAuthController.cs#L20"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationPrnIssueAuthService.cs",
+          "line": 12,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationPrnIssueAuthService.cs#L12"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationPrnIssueAuthServiceClient.cs",
+          "line": 22,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationPrnIssueAuthServiceClient.cs#L22"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 24,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L24"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/AccreditationPRNIssueAuth/{accreditationId}",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "root_status": "UI root found",
+      "journey": "SelectAuthority POST: save authorised PRN issuers",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 236,
+          "label": "UI controller invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L236"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs",
+          "line": 95,
+          "label": "Frontend HTTP service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs#L95"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationPrnIssueAuthController.cs",
+          "line": 34,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationPrnIssueAuthController.cs#L34"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationPrnIssueAuthService.cs",
+          "line": 17,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/AccreditationPrnIssueAuthService.cs#L17"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationPrnIssueAuthServiceClient.cs",
+          "line": 29,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/AccreditationPrnIssueAuthServiceClient.cs#L29"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 25,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L25"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/OverseasAccreditationSite/{accreditationId}",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "root_status": "UI root found",
+      "journey": "TaskList → GetEvidenceOfEquivalentStandardsStatus: assess overseas-site progress",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 489,
+          "label": "TaskList root",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L489"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 1321,
+          "label": "UI controller invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L1321"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs",
+          "line": 221,
+          "label": "Frontend HTTP service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs#L221"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/OverseasAccreditationSiteController.cs",
+          "line": 20,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/OverseasAccreditationSiteController.cs#L20"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/OverseasAccreditationSiteService.cs",
+          "line": 10,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/OverseasAccreditationSiteService.cs#L10"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/OverseasAccreditationSiteServiceClient.cs",
+          "line": 22,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/OverseasAccreditationSiteServiceClient.cs#L22"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 26,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L26"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/OverseasAccreditationSite/{accreditationId}",
+      "direct_caller": "DEFRA/epr-prn-rep-exp-facade",
+      "root_repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "root_status": "UI root found",
+      "journey": "EvidenceOfEquivalentStandardsCheckSiteFulfillsConditions POST: save site check",
+      "evidence": [
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+          "line": 1079,
+          "label": "UI controller invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L1079"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-frontend",
+          "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+          "path": "src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs",
+          "line": 242,
+          "label": "Frontend HTTP service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI.App/Services/AccreditationService.cs#L242"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/OverseasAccreditationSiteController.cs",
+          "line": 34,
+          "label": "Facade API invocation",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/OverseasAccreditationSiteController.cs#L34"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/OverseasAccreditationSiteService.cs",
+          "line": 15,
+          "label": "Facade service",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Services/Accreditation/OverseasAccreditationSiteService.cs#L15"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/OverseasAccreditationSiteServiceClient.cs",
+          "line": 29,
+          "label": "Backend HTTP client",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.App/Clients/Accreditation/OverseasAccreditationSiteServiceClient.cs#L29"
+        },
+        {
+          "repository": "DEFRA/epr-prn-rep-exp-facade",
+          "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+          "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+          "line": 27,
+          "label": "Backend route template",
+          "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L27"
+        }
+      ],
+      "production_use": "Not verified; PRD1 settings for frontend 1416 and facade 1417 absent from supplied config snapshot",
+      "production_classification": "excluded_from_prd1_migration_by_scope_decision"
+    }
+  ],
+  "supporting_evidence": [
+    {
+      "repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+      "path": "src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs",
+      "line": 17,
+      "label": "Frontend gate",
+      "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Controllers/AccreditationController.cs#L17"
+    },
+    {
+      "repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+      "path": "src/Epr.Reprocessor.Exporter.UI/appsettings.json",
+      "line": 89,
+      "label": "Frontend default",
+      "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/appsettings.json#L89"
+    },
+    {
+      "repository": "DEFRA/epr-prn-rep-exp-facade",
+      "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+      "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs",
+      "line": 13,
+      "label": "Facade gate",
+      "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Controllers/Accreditation/AccreditationController.cs#L13"
+    },
+    {
+      "repository": "DEFRA/epr-prn-rep-exp-facade",
+      "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+      "path": "src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json",
+      "line": 11,
+      "label": "Facade default",
+      "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/appsettings.json#L11"
+    },
+    {
+      "repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+      "path": "src/Epr.Reprocessor.Exporter.UI/Extensions/ServiceProviderExtension.cs",
+      "line": 147,
+      "label": "Frontend client registration",
+      "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/src/Epr.Reprocessor.Exporter.UI/Extensions/ServiceProviderExtension.cs#L147"
+    },
+    {
+      "repository": "DEFRA/epr-prn-rep-exp-facade",
+      "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+      "path": "src/Epr.Reprocessor.Exporter.Facade.Api/Extensions/HttpClientServiceCollectionExtension.cs",
+      "line": 49,
+      "label": "Facade client registration",
+      "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/src/Epr.Reprocessor.Exporter.Facade.Api/Extensions/HttpClientServiceCollectionExtension.cs#L49"
+    },
+    {
+      "repository": "DEFRA/epr-prn-rep-exp-frontend",
+      "commit": "7d38a8aea17a077bb7cdf9025cca7443f44be8a2",
+      "path": "pipelines/vars/prod.yaml",
+      "line": 6,
+      "label": "Frontend intended PRD1 resource",
+      "url": "https://github.com/DEFRA/epr-prn-rep-exp-frontend/blob/7d38a8aea17a077bb7cdf9025cca7443f44be8a2/pipelines/vars/prod.yaml#L6"
+    },
+    {
+      "repository": "DEFRA/epr-prn-rep-exp-facade",
+      "commit": "e5783e6594fc9e018fa9d2416c842417d72bbd75",
+      "path": "pipelines/vars/prod.yaml",
+      "line": 6,
+      "label": "Facade intended PRD1 resource",
+      "url": "https://github.com/DEFRA/epr-prn-rep-exp-facade/blob/e5783e6594fc9e018fa9d2416c842417d72bbd75/pipelines/vars/prod.yaml#L6"
+    }
+  ],
+  "queries": [
+    {
+      "query": "\"AccreditationPRNIssueAuth\" org:DEFRA",
+      "result_count": 49,
+      "limit": 100,
+      "possibly_truncated": false
+    },
+    {
+      "query": "\"OverseasAccreditationSite\" org:DEFRA",
+      "result_count": 44,
+      "limit": 100,
+      "possibly_truncated": false
+    },
+    {
+      "query": "GetAccreditationOverviewByOrgId org:DEFRA",
+      "result_count": 8,
+      "limit": 100,
+      "possibly_truncated": false
+    },
+    {
+      "query": "\"Accreditation/\" \"overview\" repo:DEFRA/epr-prn-rep-exp-frontend",
+      "result_count": 0,
+      "limit": 100,
+      "possibly_truncated": false
+    },
+    {
+      "query": "Accreditation org:DEFRA",
+      "result_count": 100,
+      "limit": 100,
+      "possibly_truncated": true
+    },
+    {
+      "query": "\"Accreditation\" \"overview\" org:DEFRA",
+      "result_count": 100,
+      "limit": 100,
+      "possibly_truncated": true
+    }
+  ],
+  "production_scope_decision": {
+    "classification": "Not used in PRD1; exclude from migration baseline",
+    "basis": "Accepted migration scope decision, supported by absent PRD1 settings for frontend 1416 and facade 1417 in the configuration snapshot.",
+    "live_azure_verified": false,
+    "limitation": "Backend feature-default availability is unchanged. Known source callers exist; the overview upstream root remains unresolved."
+  }
+}

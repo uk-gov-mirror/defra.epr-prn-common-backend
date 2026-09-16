@@ -1,0 +1,1306 @@
+{
+  "date": "2026-09-16",
+  "scope": "PRD1 migration: local PRN callers and root entry points",
+  "api_commit": "c1c250c08da94663a64dc84eb7b18c23ad9b9c5c",
+  "config_commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+  "summary": {
+    "prn_endpoints_reviewed": 12,
+    "with_executable_callers": 12,
+    "accreditation_report": "github-accreditation-callers.md",
+    "production_usage_verified": false
+  },
+  "notes": [
+    "Scope is the 12 PRN contracts retained in the PRD1 migration baseline. Accreditation consumers and their separate exclusion decision are in github-accreditation-callers.md.",
+    "Local searches covered non-ignored sibling source files, excluding dependency/build folders. This is not a complete search of every repository, branch or deployed release.",
+    "Every retained PRN action has an executable caller and at least one identified root journey or job. Additional admin upstream callers remain unresolved where stated.",
+    "Caller revisions are pinned below and exist on GitHub. Some were reviewed on feature branches; they are not assumed to be deployed in PRD1.",
+    "Tests, mocks, stubs, request collections and data-generator scripts were not treated as production consumers.",
+    "Preserve organisation/user headers and authentication as well as route and payload contracts during migration.",
+    "Cron expressions are shown as configured, without timezone conversion. March-only NPWD schedules require representative seasonal telemetry.",
+    "Related regulator-facade accreditation calls use the plural /accreditations/... routes in the disabled group, not the singular /Accreditation/... contracts."
+  ],
+  "endpoints": [
+    {
+      "method": "GET",
+      "route": "/api/v1/prn/{prnId}",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-pom-api-web",
+          "root_journey": "View PRN details; acceptance/rejection pages and PDF generation also read details",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsController.cs",
+              "line": 117,
+              "label": "Packaging UI root",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsController.cs#L117"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Services/PrnService.cs",
+              "line": 85,
+              "label": "UI service",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Services/PrnService.cs#L85"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.Application/Services/WebApiGatewayClient.cs",
+              "line": 377,
+              "label": "Frontend gateway client",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.Application/Services/WebApiGatewayClient.cs#L377"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Controllers/PrnController.cs",
+              "line": 33,
+              "label": "Gateway API action",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Controllers/PrnController.cs#L33"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Services/PrnService.cs",
+              "line": 22,
+              "label": "Gateway service",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Services/PrnService.cs#L22"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Clients/PrnServiceClient.cs",
+              "line": 65,
+              "label": "Backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Clients/PrnServiceClient.cs#L65"
+            }
+          ],
+          "production_evidence": "PRD1 packaging frontend PRDRWDWEBWA1410 has ShowPrn=true and WebAPI__BaseEndpoint targeting PRDRWDWEBWA1409; that gateway targets PRDRWDWEBWA1418. Repository settings only; not live deployment verification.",
+          "root_status": "Root entry point identified"
+        },
+        {
+          "repository": "waste-obligations",
+          "root_journey": "View PRN details",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/producer/prns/prn/controller.js",
+              "line": 18,
+              "label": "Producer UI root",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/producer/prns/prn/controller.js#L18"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/cso/prns/prn/controller.js",
+              "line": 18,
+              "label": "CSO UI root",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/cso/prns/prn/controller.js#L18"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/producer/_middlewares/prn.js",
+              "line": 10,
+              "label": "Frontend invocation",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/producer/_middlewares/prn.js#L10"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/services/waste-obligations-api.service.js",
+              "line": 96,
+              "label": "Frontend API client",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/services/waste-obligations-api.service.js#L96"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Endpoints/Organisations/Prns/ReadPrn.cs",
+              "line": 35,
+              "label": "Waste obligations API action",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Endpoints/Organisations/Prns/ReadPrn.cs#L35"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs",
+              "line": 58,
+              "label": "Backend HTTP client",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs#L58"
+            }
+          ],
+          "production_evidence": "Additional local dependency only; production routing/deployment not established. waste-obligations-frontend gates PRN routes on features.showPrns and obligations routes on features.manageObligations; both default false. Do not treat these chains as confirmed PRD1 traffic.",
+          "root_status": "Root entry point identified"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/prn/search/{page?}/{search?}/{filterBy?}/{sortBy?}",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-pom-api-web",
+          "root_journey": "Search/list PRNs and awaiting-acceptance results",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsController.cs",
+              "line": 38,
+              "label": "Packaging UI root",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsController.cs#L38"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Services/PrnService.cs",
+              "line": 138,
+              "label": "UI service",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Services/PrnService.cs#L138"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.Application/Services/WebApiGatewayClient.cs",
+              "line": 351,
+              "label": "Frontend gateway client",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.Application/Services/WebApiGatewayClient.cs#L351"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Controllers/PrnController.cs",
+              "line": 41,
+              "label": "Gateway API action",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Controllers/PrnController.cs#L41"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Services/PrnService.cs",
+              "line": 34,
+              "label": "Gateway service",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Services/PrnService.cs#L34"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Clients/PrnServiceClient.cs",
+              "line": 43,
+              "label": "Backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Clients/PrnServiceClient.cs#L43"
+            }
+          ],
+          "production_evidence": "PRD1 packaging frontend PRDRWDWEBWA1410 has ShowPrn=true and WebAPI__BaseEndpoint targeting PRDRWDWEBWA1409; that gateway targets PRDRWDWEBWA1418. Repository settings only; not live deployment verification.",
+          "root_status": "Root entry point identified"
+        },
+        {
+          "repository": "waste-obligations",
+          "root_journey": "Search/list PRNs; obligations page also lists awaiting-acceptance PRNs",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/producer/prns/controller.js",
+              "line": 10,
+              "label": "Producer UI root",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/producer/prns/controller.js#L10"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/cso/prns/controller.js",
+              "line": 10,
+              "label": "CSO UI root",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/cso/prns/controller.js#L10"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/producer/_middlewares/prns.js",
+              "line": 11,
+              "label": "Frontend invocation",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/producer/_middlewares/prns.js#L11"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/services/waste-obligations-api.service.js",
+              "line": 116,
+              "label": "Frontend API client",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/services/waste-obligations-api.service.js#L116"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Endpoints/Organisations/Prns/SearchPrns.cs",
+              "line": 39,
+              "label": "Waste obligations API action",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Endpoints/Organisations/Prns/SearchPrns.cs#L39"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs",
+              "line": 76,
+              "label": "Backend HTTP client",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs#L76"
+            }
+          ],
+          "production_evidence": "Additional local dependency only; production routing/deployment not established. waste-obligations-frontend gates PRN routes on features.showPrns and obligations routes on features.manageObligations; both default false. Do not treat these chains as confirmed PRD1 traffic.",
+          "root_status": "Root entry point identified"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/prn/organisation",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-pom-api-web",
+          "root_journey": "Download PRN CSV; bulk acceptance and accepted-note lists also use organisation PRNs",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsController.cs",
+              "line": 133,
+              "label": "Packaging UI root",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsController.cs#L133"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Services/PrnService.cs",
+              "line": 194,
+              "label": "UI service",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Services/PrnService.cs#L194"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.Application/Services/WebApiGatewayClient.cs",
+              "line": 331,
+              "label": "Frontend gateway client",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.Application/Services/WebApiGatewayClient.cs#L331"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Controllers/PrnController.cs",
+              "line": 25,
+              "label": "Gateway API action",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Controllers/PrnController.cs#L25"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Services/PrnService.cs",
+              "line": 16,
+              "label": "Gateway service",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Services/PrnService.cs#L16"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Clients/PrnServiceClient.cs",
+              "line": 22,
+              "label": "Backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Clients/PrnServiceClient.cs#L22"
+            }
+          ],
+          "production_evidence": "PRD1 packaging frontend PRDRWDWEBWA1410 has ShowPrn=true and WebAPI__BaseEndpoint targeting PRDRWDWEBWA1409; that gateway targets PRDRWDWEBWA1418. Repository settings only; not live deployment verification.",
+          "root_status": "Root entry point identified"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/prn/ModifiedPrnsbyDate",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-prn-integration-function",
+          "root_journey": "Scheduled UpdatePrnsList exports changed PRN statuses to NPWD",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/UpdateNpwdPrnsFunction.cs",
+              "line": 28,
+              "label": "Timer root",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/UpdateNpwdPrnsFunction.cs#L28"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/UpdateNpwdPrnsFunction.cs",
+              "line": 173,
+              "label": "Function invocation",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/UpdateNpwdPrnsFunction.cs#L173"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Common/RESTServices/PrnBackendService/NpwdPrnService.cs",
+              "line": 58,
+              "label": "NPWD backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Common/RESTServices/PrnBackendService/NpwdPrnService.cs#L58"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Common/RESTServices/BaseHttpServiceOld.cs",
+              "line": 58,
+              "label": "Base URL composition",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Common/RESTServices/BaseHttpServiceOld.cs#L58"
+            }
+          ],
+          "production_evidence": "RunIntegration=true; PRD1 UpdatePrnsTrigger is 0 1,31 0-7 * 3 1-5 (March weekdays). PRDRWDWEBFA1412 config targets PRDRWDWEBWA1418 and api/v1/prn. Actual execution not verified.",
+          "root_status": "Root entry point identified"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/prn/syncstatuses",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-prn-integration-function",
+          "root_journey": "Scheduled EmailNpwdReconciliation produces a reconciliation report",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/EmailNpwdReconciliationFunction.cs",
+              "line": 23,
+              "label": "Timer root",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/EmailNpwdReconciliationFunction.cs#L23"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/EmailNpwdReconciliationFunction.cs",
+              "line": 49,
+              "label": "Function invocation",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/EmailNpwdReconciliationFunction.cs#L49"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Common/RESTServices/PrnBackendService/NpwdPrnService.cs",
+              "line": 114,
+              "label": "NPWD backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Common/RESTServices/PrnBackendService/NpwdPrnService.cs#L114"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Common/RESTServices/BaseHttpServiceOld.cs",
+              "line": 58,
+              "label": "Base URL composition",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Common/RESTServices/BaseHttpServiceOld.cs#L58"
+            }
+          ],
+          "production_evidence": "RunReconciliation=true; EmailNpwdReconciliationTrigger is 0 0 21 * 3 1-5 (March weekdays). PRDRWDWEBFA1412 config targets PRDRWDWEBWA1418 and api/v1/prn. Actual execution not verified.",
+          "root_status": "Root entry point identified"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "route": "/api/v1/prn/obligationcalculation/{year}",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-pom-api-web",
+          "root_journey": "View recycling obligations for the selected year",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsObligationController.cs",
+              "line": 69,
+              "label": "Packaging UI root",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsObligationController.cs#L69"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Services/PrnService.cs",
+              "line": 250,
+              "label": "UI service",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Services/PrnService.cs#L250"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.Application/Services/WebApiGatewayClient.cs",
+              "line": 501,
+              "label": "Frontend gateway client",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.Application/Services/WebApiGatewayClient.cs#L501"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Controllers/PrnController.cs",
+              "line": 49,
+              "label": "Gateway API action",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Controllers/PrnController.cs#L49"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Services/PrnService.cs",
+              "line": 40,
+              "label": "Gateway service",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Services/PrnService.cs#L40"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Clients/PrnServiceClient.cs",
+              "line": 102,
+              "label": "Backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Clients/PrnServiceClient.cs#L102"
+            }
+          ],
+          "production_evidence": "PRD1 packaging frontend PRDRWDWEBWA1410 has ShowPrn=true and WebAPI__BaseEndpoint targeting PRDRWDWEBWA1409; that gateway targets PRDRWDWEBWA1418. Repository settings only; not live deployment verification.",
+          "root_status": "Root entry point identified"
+        },
+        {
+          "repository": "waste-obligations",
+          "root_journey": "View obligations; compliance journeys also fetch obligations",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/producer/obligations/controller.js",
+              "line": 22,
+              "label": "Producer UI root",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/producer/obligations/controller.js#L22"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/cso/obligations/controller.js",
+              "line": 22,
+              "label": "CSO UI root",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/cso/obligations/controller.js#L22"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/_shared/obligations/_middlewares/obligations-for-year.js",
+              "line": 14,
+              "label": "Frontend invocation",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/_shared/obligations/_middlewares/obligations-for-year.js#L14"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/services/waste-obligations-api.service.js",
+              "line": 54,
+              "label": "Frontend API client",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/services/waste-obligations-api.service.js#L54"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Endpoints/Organisations/Obligations/ReadObligations.cs",
+              "line": 36,
+              "label": "Waste obligations API action",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Endpoints/Organisations/Obligations/ReadObligations.cs#L36"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs",
+              "line": 23,
+              "label": "Backend HTTP client",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs#L23"
+            }
+          ],
+          "production_evidence": "Additional local dependency only; production routing/deployment not established. waste-obligations-frontend gates PRN routes on features.showPrns and obligations routes on features.manageObligations; both default false. Do not treat these chains as confirmed PRD1 traffic.",
+          "root_status": "Root entry point identified"
+        },
+        {
+          "repository": "waste-obligations",
+          "root_journey": "Background obligation hydration and historical-backfill workers → OrganisationObligationHydrationService → IOrganisationObligationSource (registered to PrnCommonBackendService)",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Services/OrganisationObligations/OrganisationObligationHydrationWorker.cs",
+              "line": 18,
+              "label": "Hydration worker root",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Services/OrganisationObligations/OrganisationObligationHydrationWorker.cs#L18"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Services/OrganisationObligations/OrganisationObligationHistoricalBackfillWorker.cs",
+              "line": 16,
+              "label": "Historical backfill worker root",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Services/OrganisationObligations/OrganisationObligationHistoricalBackfillWorker.cs#L16"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Services/OrganisationObligations/OrganisationObligationHydrationService.cs",
+              "line": 470,
+              "label": "Hydration invocation",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Services/OrganisationObligations/OrganisationObligationHydrationService.cs#L470"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Services/PrnCommonBackend/ServiceCollectionExtensions.cs",
+              "line": 35,
+              "label": "Client registration",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Services/PrnCommonBackend/ServiceCollectionExtensions.cs#L35"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs",
+              "line": 23,
+              "label": "Backend HTTP request",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs#L23"
+            }
+          ],
+          "production_evidence": "Local background-worker dependency; deployed worker enablement and target environment not verified.",
+          "root_status": "Root entry point identified"
+        },
+        {
+          "repository": "waste-obligations",
+          "root_journey": "Admin unsubmitted-organisation details endpoint → UnsubmittedOrganisationDetailsService → ReadObligations; upstream human/tool caller unresolved",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Endpoints/Admin/AdminUnsubmittedComplianceDeclarationEndpoints.cs",
+              "line": 77,
+              "label": "Admin entry point",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Endpoints/Admin/AdminUnsubmittedComplianceDeclarationEndpoints.cs#L77"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Services/UnsubmittedOrganisationDetailsService.cs",
+              "line": 75,
+              "label": "Service invocation",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Services/UnsubmittedOrganisationDetailsService.cs#L75"
+            }
+          ],
+          "production_evidence": "Admin code path exists; no upstream application caller identified locally. Production use unknown.",
+          "root_status": "Chain stops at admin API; external caller unresolved"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/prn/status",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-pom-api-web",
+          "root_journey": "Accept one or multiple PRNs; reject through PrnsRejectController",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsAcceptController.cs",
+              "line": 159,
+              "label": "Packaging UI root",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsAcceptController.cs#L159"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Services/PrnService.cs",
+              "line": 102,
+              "label": "UI service",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Services/PrnService.cs#L102"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.Application/Services/WebApiGatewayClient.cs",
+              "line": 397,
+              "label": "Frontend gateway client",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.Application/Services/WebApiGatewayClient.cs#L397"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Controllers/PrnController.cs",
+              "line": 57,
+              "label": "Gateway API action",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Controllers/PrnController.cs#L57"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Services/PrnService.cs",
+              "line": 28,
+              "label": "Gateway service",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Services/PrnService.cs#L28"
+            },
+            {
+              "repository": "DEFRA/epr-pom-api-web",
+              "commit": "90327b4de21362eb025f0c59266349d974319bff",
+              "path": "WebApiGateway/WebApiGateway.Api/Clients/PrnServiceClient.cs",
+              "line": 84,
+              "label": "Backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-pom-api-web/blob/90327b4de21362eb025f0c59266349d974319bff/WebApiGateway/WebApiGateway.Api/Clients/PrnServiceClient.cs#L84"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsRejectController.cs",
+              "line": 48,
+              "label": "Reject root",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsRejectController.cs#L48"
+            },
+            {
+              "repository": "DEFRA/epr-packaging-frontend",
+              "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c",
+              "path": "src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsAcceptController.cs",
+              "line": 276,
+              "label": "Bulk accept root",
+              "url": "https://github.com/DEFRA/epr-packaging-frontend/blob/a1d483166a8c3de6d0cd22e776f767da4574d92c/src/FrontendSchemeRegistration.UI/Controllers/Prns/PrnsAcceptController.cs#L276"
+            }
+          ],
+          "production_evidence": "PRD1 packaging frontend PRDRWDWEBWA1410 has ShowPrn=true and WebAPI__BaseEndpoint targeting PRDRWDWEBWA1409; that gateway targets PRDRWDWEBWA1418. Repository settings only; not live deployment verification.",
+          "root_status": "Root entry point identified"
+        },
+        {
+          "repository": "waste-obligations",
+          "root_journey": "Confirm acceptance of a PRN (frontend calls PATCH; backend adapter calls POST status)",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/producer/prns/prn/confirm-accept/controller.js",
+              "line": 4,
+              "label": "Producer UI root",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/producer/prns/prn/confirm-accept/controller.js#L4"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/cso/prns/prn/confirm-accept/controller.js",
+              "line": 4,
+              "label": "CSO UI root",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/cso/prns/prn/confirm-accept/controller.js#L4"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/routes/_shared/prns/prn-status-update.js",
+              "line": 63,
+              "label": "Frontend invocation",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/_shared/prns/prn-status-update.js#L63"
+            },
+            {
+              "repository": "DEFRA/waste-obligations-frontend",
+              "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+              "path": "src/server/services/waste-obligations-api.service.js",
+              "line": 106,
+              "label": "Frontend API client",
+              "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/services/waste-obligations-api.service.js#L106"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Endpoints/Organisations/Prns/UpdatePrn.cs",
+              "line": 41,
+              "label": "Waste obligations API action",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Endpoints/Organisations/Prns/UpdatePrn.cs#L41"
+            },
+            {
+              "repository": "DEFRA/waste-obligations",
+              "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006",
+              "path": "src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs",
+              "line": 139,
+              "label": "Backend HTTP client",
+              "url": "https://github.com/DEFRA/waste-obligations/blob/dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006/src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs#L139"
+            }
+          ],
+          "production_evidence": "Additional local dependency only; production routing/deployment not established. waste-obligations-frontend gates PRN routes on features.showPrns and obligations routes on features.manageObligations; both default false. Do not treat these chains as confirmed PRD1 traffic.",
+          "root_status": "Root entry point identified"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/prn/organisation/{submitterId}/calculate",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-prn-obligationcalculations-function",
+          "root_journey": "StoreApprovedSubmissions timer fetches approved submissions → groups and sends Service Bus messages → ProcessApprovedSubmissions queue trigger → calculate obligations",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-prn-obligationcalculations-function",
+              "commit": "ec3a8bf8cee6f7dbd1035bfe98af8105e631722a",
+              "path": "src/EPR.PRN.ObligationCalculation.Function/StoreApprovedSubmissionsFunction.cs",
+              "line": 12,
+              "label": "Scheduled root",
+              "url": "https://github.com/DEFRA/epr-prn-obligationcalculations-function/blob/ec3a8bf8cee6f7dbd1035bfe98af8105e631722a/src/EPR.PRN.ObligationCalculation.Function/StoreApprovedSubmissionsFunction.cs#L12"
+            },
+            {
+              "repository": "DEFRA/epr-prn-obligationcalculations-function",
+              "commit": "ec3a8bf8cee6f7dbd1035bfe98af8105e631722a",
+              "path": "src/EPR.PRN.ObligationCalculation.Function/StoreApprovedSubmissionsFunction.cs",
+              "line": 27,
+              "label": "Queue producer invocation",
+              "url": "https://github.com/DEFRA/epr-prn-obligationcalculations-function/blob/ec3a8bf8cee6f7dbd1035bfe98af8105e631722a/src/EPR.PRN.ObligationCalculation.Function/StoreApprovedSubmissionsFunction.cs#L27"
+            },
+            {
+              "repository": "DEFRA/epr-prn-obligationcalculations-function",
+              "commit": "ec3a8bf8cee6f7dbd1035bfe98af8105e631722a",
+              "path": "src/EPR.PRN.ObligationCalculation.Application/Services/ServiceBusProvider.cs",
+              "line": 33,
+              "label": "Queue send",
+              "url": "https://github.com/DEFRA/epr-prn-obligationcalculations-function/blob/ec3a8bf8cee6f7dbd1035bfe98af8105e631722a/src/EPR.PRN.ObligationCalculation.Application/Services/ServiceBusProvider.cs#L33"
+            },
+            {
+              "repository": "DEFRA/epr-prn-obligationcalculations-function",
+              "commit": "ec3a8bf8cee6f7dbd1035bfe98af8105e631722a",
+              "path": "src/EPR.PRN.ObligationCalculation.Function/ProcessApprovedSubmissionsFunction.cs",
+              "line": 13,
+              "label": "Queue consumer",
+              "url": "https://github.com/DEFRA/epr-prn-obligationcalculations-function/blob/ec3a8bf8cee6f7dbd1035bfe98af8105e631722a/src/EPR.PRN.ObligationCalculation.Function/ProcessApprovedSubmissionsFunction.cs#L13"
+            },
+            {
+              "repository": "DEFRA/epr-prn-obligationcalculations-function",
+              "commit": "ec3a8bf8cee6f7dbd1035bfe98af8105e631722a",
+              "path": "src/EPR.PRN.ObligationCalculation.Function/ProcessApprovedSubmissionsFunction.cs",
+              "line": 26,
+              "label": "Client invocation",
+              "url": "https://github.com/DEFRA/epr-prn-obligationcalculations-function/blob/ec3a8bf8cee6f7dbd1035bfe98af8105e631722a/src/EPR.PRN.ObligationCalculation.Function/ProcessApprovedSubmissionsFunction.cs#L26"
+            },
+            {
+              "repository": "DEFRA/epr-prn-obligationcalculations-function",
+              "commit": "ec3a8bf8cee6f7dbd1035bfe98af8105e631722a",
+              "path": "src/EPR.PRN.ObligationCalculation.Application/Services/PrnService.cs",
+              "line": 29,
+              "label": "Backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-prn-obligationcalculations-function/blob/ec3a8bf8cee6f7dbd1035bfe98af8105e631722a/src/EPR.PRN.ObligationCalculation.Application/Services/PrnService.cs#L29"
+            },
+            {
+              "repository": "epr-app-config-settings",
+              "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+              "path": "prd1/PRDRWDWEBFA1410.json",
+              "line": 43,
+              "label": "PRD1 route template"
+            }
+          ],
+          "production_evidence": "PRDRWDWEBFA1410 targets PRDRWDWEBWA1418, FunctionIsEnabled=true; producer schedule 0 0 1 * * * (daily). Queue producer and consumer use the same configured ObligationQueueName. Root data originates in approved submissions, but the executable root for this request chain is the timer.",
+          "root_status": "Root entry point identified"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/prn/prn-details",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-prn-integration-function",
+          "root_journey": "Scheduled FetchNpwdIssuedPrnsFunction fetches NPWD notes, queues and processes them, then saves each note",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/FetchNpwdIssuedPrnsFunction.cs",
+              "line": 51,
+              "label": "Timer root",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/FetchNpwdIssuedPrnsFunction.cs#L51"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/FetchNpwdIssuedPrnsFunction.cs",
+              "line": 144,
+              "label": "Function invocation",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/FetchNpwdIssuedPrnsFunction.cs#L144"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Common/RESTServices/PrnBackendService/NpwdPrnService.cs",
+              "line": 93,
+              "label": "NPWD backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Common/RESTServices/PrnBackendService/NpwdPrnService.cs#L93"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Common/RESTServices/BaseHttpServiceOld.cs",
+              "line": 58,
+              "label": "Base URL composition",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Common/RESTServices/BaseHttpServiceOld.cs#L58"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/FetchSinglePrnFunction.cs",
+              "line": 21,
+              "label": "Manual HTTP enqueue root",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/FetchSinglePrnFunction.cs#L21"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/FetchSinglePrnFunction.cs",
+              "line": 44,
+              "label": "Manual queue producer",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/FetchSinglePrnFunction.cs#L44"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/FetchNpwdIssuedPrnsFunction.cs",
+              "line": 95,
+              "label": "Scheduled queue drain",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/FetchNpwdIssuedPrnsFunction.cs#L95"
+            }
+          ],
+          "production_evidence": "RunIntegration=true; FetchNpwdIssuedPrns__Schedule is 0 0 23 * 3 1-5 (March weekdays). FetchSinglePrnFunction can also enqueue a missing note for later processing. PRDRWDWEBFA1412 config targets PRDRWDWEBWA1418 and api/v1/prn. Actual execution not verified.",
+          "root_status": "Root entry point identified"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "route": "/api/v1/prn/updatesyncstatus",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-prn-integration-function",
+          "root_journey": "Same UpdatePrnsList job records successful NPWD synchronisation",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/UpdateNpwdPrnsFunction.cs",
+              "line": 28,
+              "label": "Timer root",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/UpdateNpwdPrnsFunction.cs#L28"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/UpdateNpwdPrnsFunction.cs",
+              "line": 110,
+              "label": "Function invocation",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/UpdateNpwdPrnsFunction.cs#L110"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Common/RESTServices/PrnBackendService/NpwdPrnService.cs",
+              "line": 76,
+              "label": "NPWD backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Common/RESTServices/PrnBackendService/NpwdPrnService.cs#L76"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Common/RESTServices/BaseHttpServiceOld.cs",
+              "line": 58,
+              "label": "Base URL composition",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Common/RESTServices/BaseHttpServiceOld.cs#L58"
+            }
+          ],
+          "production_evidence": "RunIntegration=true; same March-weekday schedule. PRDRWDWEBFA1412 config targets PRDRWDWEBWA1418 and api/v1/prn. Actual execution not verified.",
+          "root_status": "Root entry point identified"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "route": "/api/v2/prn",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-prn-integration-function",
+          "root_journey": "Scheduled FetchRrepwIssuedPrns imports issued RREPW PRNs",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/FetchRrepwIssuedPrnsFunction.cs",
+              "line": 40,
+              "label": "Timer root",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/FetchRrepwIssuedPrnsFunction.cs#L40"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/FetchRrepwIssuedPrnsFunction.cs",
+              "line": 162,
+              "label": "Function invocation",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/FetchRrepwIssuedPrnsFunction.cs#L162"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Common/RESTServices/PrnBackendService/PrnService.cs",
+              "line": 38,
+              "label": "v2 backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Common/RESTServices/PrnBackendService/PrnService.cs#L38"
+            }
+          ],
+          "production_evidence": "PRDRWDWEBFA1412 targets PRDRWDWEBWA1418; FetchRrepwIssuedPrns__Trigger = 0 0,30 7-23 * * *. No equivalent RunIntegration check found in these two function Run methods. Live settings not checked.",
+          "root_status": "Root entry point identified"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "route": "/api/v2/prn/modified-prns",
+      "production_group": "retain_prn",
+      "status": "executable_caller_and_root_found",
+      "callers": [
+        {
+          "repository": "epr-prn-integration-function",
+          "root_journey": "Scheduled UpdateRrepwPrns exports status changes to RREPW",
+          "chain_evidence": [
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/UpdateRrepwPrnsFunction.cs",
+              "line": 26,
+              "label": "Timer root",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/UpdateRrepwPrnsFunction.cs#L26"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Api/Functions/UpdateRrepwPrnsFunction.cs",
+              "line": 90,
+              "label": "Function invocation",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Api/Functions/UpdateRrepwPrnsFunction.cs#L90"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Common/RESTServices/PrnBackendService/PrnService.cs",
+              "line": 44,
+              "label": "v2 backend HTTP client",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Common/RESTServices/PrnBackendService/PrnService.cs#L44"
+            },
+            {
+              "repository": "DEFRA/epr-prn-integration-function",
+              "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e",
+              "path": "src/EprPrnIntegration.Common/RESTServices/PrnBackendService/PrnRoutes.cs",
+              "line": 15,
+              "label": "Route builder",
+              "url": "https://github.com/DEFRA/epr-prn-integration-function/blob/4a37dbcd55b7620bf596172abec072b99b045b4e/src/EprPrnIntegration.Common/RESTServices/PrnBackendService/PrnRoutes.cs#L15"
+            }
+          ],
+          "production_evidence": "PRDRWDWEBFA1412 targets PRDRWDWEBWA1418; UpdateRrepwPrns__Trigger = 0 10,40 7-23 * * *. No equivalent RunIntegration check found in these two function Run methods. Live settings not checked.",
+          "root_status": "Root entry point identified"
+        }
+      ]
+    }
+  ],
+  "production_caller_settings": [
+    {
+      "setting": "WebAPI__BaseEndpoint",
+      "value": "https://prdrwdwebwa1409.azurewebsites.net/",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBWA1410.json",
+        "line": 483,
+        "label": "PRDRWDWEBWA1410.json"
+      }
+    },
+    {
+      "setting": "FeatureManagement__ShowPrn",
+      "value": true,
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBWA1410.json",
+        "line": 243,
+        "label": "PRDRWDWEBWA1410.json"
+      }
+    },
+    {
+      "setting": "PrnServiceApi__BaseUrl",
+      "value": "https://prdrwdwebwa1418.azurewebsites.net",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBWA1409.json",
+        "line": 143,
+        "label": "PRDRWDWEBWA1409.json"
+      }
+    },
+    {
+      "setting": "Service__PrnBaseUrl",
+      "value": "https://prdrwdwebwa1418.azurewebsites.net/",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1412.json",
+        "line": 83,
+        "label": "PRDRWDWEBFA1412.json"
+      }
+    },
+    {
+      "setting": "Service__PrnEndPointName",
+      "value": "api/v1/prn",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1412.json",
+        "line": 88,
+        "label": "PRDRWDWEBFA1412.json"
+      }
+    },
+    {
+      "setting": "FeatureManagement__RunIntegration",
+      "value": true,
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1412.json",
+        "line": 93,
+        "label": "PRDRWDWEBFA1412.json"
+      }
+    },
+    {
+      "setting": "FeatureManagement__RunReconciliation",
+      "value": true,
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1412.json",
+        "line": 233,
+        "label": "PRDRWDWEBFA1412.json"
+      }
+    },
+    {
+      "setting": "FetchNpwdIssuedPrns__Schedule",
+      "value": "0 0 23 * 3 1-5",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1412.json",
+        "line": 38,
+        "label": "PRDRWDWEBFA1412.json"
+      }
+    },
+    {
+      "setting": "UpdatePrnsTrigger",
+      "value": "0 1,31 0-7 * 3 1-5",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1412.json",
+        "line": 78,
+        "label": "PRDRWDWEBFA1412.json"
+      }
+    },
+    {
+      "setting": "EmailNpwdReconciliationTrigger",
+      "value": "0 0 21 * 3 1-5",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1412.json",
+        "line": 228,
+        "label": "PRDRWDWEBFA1412.json"
+      }
+    },
+    {
+      "setting": "FetchRrepwIssuedPrns__Trigger",
+      "value": "0 0,30 7-23 * * *",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1412.json",
+        "line": 43,
+        "label": "PRDRWDWEBFA1412.json"
+      }
+    },
+    {
+      "setting": "UpdateRrepwPrns__Trigger",
+      "value": "0 10,40 7-23 * * *",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1412.json",
+        "line": 58,
+        "label": "PRDRWDWEBFA1412.json"
+      }
+    },
+    {
+      "setting": "PrnServiceApi__BaseUrl",
+      "value": "https://prdrwdwebwa1418.azurewebsites.net/",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1410.json",
+        "line": 33,
+        "label": "PRDRWDWEBFA1410.json"
+      }
+    },
+    {
+      "setting": "PrnServiceApi__PrnCalculateEndPoint",
+      "value": "api/v1/prn/organisation/{0}/calculate",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1410.json",
+        "line": 43,
+        "label": "PRDRWDWEBFA1410.json"
+      }
+    },
+    {
+      "setting": "ApplicationConfig__FunctionIsEnabled",
+      "value": "true",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1410.json",
+        "line": 88,
+        "label": "PRDRWDWEBFA1410.json"
+      }
+    },
+    {
+      "setting": "StoreApprovedSubmissions__Schedule",
+      "value": "0 0 1 * * *",
+      "evidence": {
+        "repository": "epr-app-config-settings",
+        "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+        "path": "prd1/PRDRWDWEBFA1410.json",
+        "line": 8,
+        "label": "PRDRWDWEBFA1410.json"
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "route": "/api/v1/prn/raw-data",
+      "repository": "legacy-prns",
+      "finding": "Migration client requests a raw-data contract absent from the audited API snapshot. Do not silently add it to the 24-action inventory or equate it with GET /prn/{prnId}. Reconcile branches/versions before relying on this migration job.",
+      "evidence": [
+        {
+          "repository": "DEFRA/legacy-prns",
+          "commit": "7f9242599c6235c6bfdbcbb49ce1292332ebc6b6",
+          "path": "src/Api/Jobs/MigrateLegacyPrns.cs",
+          "line": 45,
+          "label": "Migration job",
+          "url": "https://github.com/DEFRA/legacy-prns/blob/7f9242599c6235c6bfdbcbb49ce1292332ebc6b6/src/Api/Jobs/MigrateLegacyPrns.cs#L45"
+        },
+        {
+          "repository": "DEFRA/legacy-prns",
+          "commit": "7f9242599c6235c6bfdbcbb49ce1292332ebc6b6",
+          "path": "src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs",
+          "line": 8,
+          "label": "Missing contract reference",
+          "url": "https://github.com/DEFRA/legacy-prns/blob/7f9242599c6235c6bfdbcbb49ce1292332ebc6b6/src/Api/Services/PrnCommonBackend/PrnCommonBackendService.cs#L8"
+        }
+      ]
+    }
+  ],
+  "additional_evidence": [
+    {
+      "repository": "DEFRA/waste-obligations-frontend",
+      "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+      "path": "src/config/config.js",
+      "line": 477,
+      "label": "Waste-obligations frontend feature defaults",
+      "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/config/config.js#L477"
+    },
+    {
+      "repository": "DEFRA/waste-obligations-frontend",
+      "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+      "path": "src/server/routes/producer/index.js",
+      "line": 22,
+      "label": "Producer route registration gates",
+      "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/producer/index.js#L22"
+    },
+    {
+      "repository": "DEFRA/waste-obligations-frontend",
+      "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6",
+      "path": "src/server/routes/cso/index.js",
+      "line": 22,
+      "label": "CSO route registration gates",
+      "url": "https://github.com/DEFRA/waste-obligations-frontend/blob/78c750e4fae8228cc37f2ac912e045dbef0aa0a6/src/server/routes/cso/index.js#L22"
+    },
+    {
+      "repository": "DEFRA/epr-regulator-service-facade",
+      "commit": "e289ba355ee8571ae358ca2e0996ddeefbf9bf28",
+      "path": "src/EPR.RegulatorService.Facade.API/appsettings.json",
+      "line": 134,
+      "label": "Regulator facade route configuration",
+      "url": "https://github.com/DEFRA/epr-regulator-service-facade/blob/e289ba355ee8571ae358ca2e0996ddeefbf9bf28/src/EPR.RegulatorService.Facade.API/appsettings.json#L134"
+    }
+  ],
+  "source_revisions": [
+    {
+      "repository": "DEFRA/epr-app-config-settings",
+      "commit": "4e1bdfe779ca771434f7675e678f878044c2c980"
+    },
+    {
+      "repository": "DEFRA/epr-packaging-frontend",
+      "commit": "a1d483166a8c3de6d0cd22e776f767da4574d92c"
+    },
+    {
+      "repository": "DEFRA/epr-pom-api-web",
+      "commit": "90327b4de21362eb025f0c59266349d974319bff"
+    },
+    {
+      "repository": "DEFRA/epr-prn-integration-function",
+      "commit": "4a37dbcd55b7620bf596172abec072b99b045b4e"
+    },
+    {
+      "repository": "DEFRA/epr-prn-obligationcalculations-function",
+      "commit": "ec3a8bf8cee6f7dbd1035bfe98af8105e631722a"
+    },
+    {
+      "repository": "DEFRA/epr-regulator-service-facade",
+      "commit": "e289ba355ee8571ae358ca2e0996ddeefbf9bf28"
+    },
+    {
+      "repository": "DEFRA/legacy-prns",
+      "commit": "7f9242599c6235c6bfdbcbb49ce1292332ebc6b6"
+    },
+    {
+      "repository": "DEFRA/waste-obligations",
+      "commit": "dd8ca744ea80572db1dc6fac94ddaa4d9fb0a006"
+    },
+    {
+      "repository": "DEFRA/waste-obligations-frontend",
+      "commit": "78c750e4fae8228cc37f2ac912e045dbef0aa0a6"
+    }
+  ]
+}

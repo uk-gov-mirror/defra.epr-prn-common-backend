@@ -1,0 +1,1604 @@
+{
+  "metadata": {
+    "repository": "epr-prn-common-backend",
+    "branch": "main",
+    "commit": "c1c250c08da94663a64dc84eb7b18c23ad9b9c5c",
+    "date": "2026-09-16",
+    "api_action_count": 74,
+    "controller_count": 16,
+    "notes": [
+      "Source/configuration assessment; deployed images, effective runtime settings and production telemetry have not been independently verified.",
+      "Canonical v1/v2 paths represent API versions 1.0/2.0. Original constraints, casing and optional segments are retained. Query parameters are not part of endpoint identity.",
+      "Every declared HTTP action is included regardless of feature state. Gates are controller-level in this snapshot.",
+      "API source defaults both flags to true. Checked-in environment settings are combined with those defaults; a deployed image may differ.",
+      "Swagger can omit feature-gated routes. Inventory was checked against source declarations rather than a single Swagger output.",
+      "The accreditation overview route includes both Accreditation and accreditations segments, as declared in source.",
+      "Exception re-execution targets /error and /error-development have no corresponding endpoint declaration. NonAction helper methods are excluded.",
+      "Swagger routes are development-only middleware families. Health is operational and counted separately from API actions."
+    ]
+  },
+  "feature_toggles": [
+    {
+      "name": "ReprocessorExporter",
+      "checked_in_default": true,
+      "default_source": "src/EPR.PRN.Backend.API/appsettings.json",
+      "default_line": 19,
+      "api_action_count": 50,
+      "deployed_value": "unknown"
+    },
+    {
+      "name": "EnableAccreditation",
+      "checked_in_default": true,
+      "default_source": "src/EPR.PRN.Backend.API/appsettings.json",
+      "default_line": 20,
+      "api_action_count": 12,
+      "deployed_value": "unknown"
+    }
+  ],
+  "endpoints": [
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/Accreditation/{organisationId}/{materialId}/{applicationTypeId}",
+      "declared_route": "/api/v{version:apiVersion}/Accreditation/{organisationId}/{materialId}/{applicationTypeId}",
+      "controller": "AccreditationController",
+      "action": "Get",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs",
+      "route_line": 27,
+      "action_line": 29,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs#L27"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/Accreditation/{accreditationId}",
+      "declared_route": "/api/v{version:apiVersion}/Accreditation/{accreditationId}",
+      "controller": "AccreditationController",
+      "action": "Get",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs",
+      "route_line": 42,
+      "action_line": 45,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs#L42"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/Accreditation",
+      "declared_route": "/api/v{version:apiVersion}/Accreditation",
+      "controller": "AccreditationController",
+      "action": "Post",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs",
+      "route_line": 57,
+      "action_line": 59,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs#L57"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/Accreditation/Files/{externalId}",
+      "declared_route": "/api/v{version:apiVersion}/Accreditation/Files/{externalId}",
+      "controller": "AccreditationController",
+      "action": "GetFileUpload",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs",
+      "route_line": 77,
+      "action_line": 80,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs#L77"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/Accreditation/{accreditationId}/Files/{fileUploadTypeId}/{fileUploadStatusId?}",
+      "declared_route": "/api/v{version:apiVersion}/Accreditation/{accreditationId}/Files/{fileUploadTypeId}/{fileUploadStatusId?}",
+      "controller": "AccreditationController",
+      "action": "GetFileUploads",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs",
+      "route_line": 86,
+      "action_line": 89,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs#L86"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/Accreditation/{accreditationId}/Files",
+      "declared_route": "/api/v{version:apiVersion}/Accreditation/{accreditationId}/Files",
+      "controller": "AccreditationController",
+      "action": "UpsertFileUpload",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs",
+      "route_line": 105,
+      "action_line": 107,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs#L105"
+    },
+    {
+      "method": "DELETE",
+      "api_version": "1.0",
+      "route": "/api/v1/Accreditation/{accreditationId}/Files/{fileId}",
+      "declared_route": "/api/v{version:apiVersion}/Accreditation/{accreditationId}/Files/{fileId}",
+      "controller": "AccreditationController",
+      "action": "DeleteFileUpload",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs",
+      "route_line": 125,
+      "action_line": 127,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs#L125"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/Accreditation/accreditations/{organisationId:guid}/overview",
+      "declared_route": "/api/v{version:apiVersion}/Accreditation/accreditations/{organisationId:guid}/overview",
+      "controller": "AccreditationController",
+      "action": "GetAccreditationsOverviewForOrgId",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs",
+      "route_line": 134,
+      "action_line": 145,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationController.cs#L134"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/AccreditationPRNIssueAuth/{accreditationId}",
+      "declared_route": "/api/v{version:apiVersion}/AccreditationPRNIssueAuth/{accreditationId}",
+      "controller": "AccreditationPrnIssueAuthController",
+      "action": "GetByAccreditationId",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationPrnIssueAuthController.cs",
+      "route_line": 16,
+      "action_line": 19,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationPrnIssueAuthController.cs#L16"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/AccreditationPRNIssueAuth/{accreditationId}",
+      "declared_route": "/api/v{version:apiVersion}/AccreditationPRNIssueAuth/{accreditationId}",
+      "controller": "AccreditationPrnIssueAuthController",
+      "action": "Post",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationPrnIssueAuthController.cs",
+      "route_line": 31,
+      "action_line": 33,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationPrnIssueAuthController.cs#L31"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/AccreditationTaskStatus",
+      "declared_route": "/api/v{version:apiVersion}/AccreditationTaskStatus",
+      "controller": "AccreditationTaskStatusController",
+      "action": "UpdateAccreditationTaskStatus",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationTaskStatusController.cs",
+      "route_line": 23,
+      "action_line": 27,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/AccreditationTaskStatusController.cs#L23"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/OverseasAccreditationSite/{accreditationId}",
+      "declared_route": "/api/v{version:apiVersion}/OverseasAccreditationSite/{accreditationId}",
+      "controller": "OverseasAccreditationSiteController",
+      "action": "GetAllByAccreditationId",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/OverseasAccreditationSiteController.cs",
+      "route_line": 15,
+      "action_line": 18,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/OverseasAccreditationSiteController.cs#L15"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/OverseasAccreditationSite/{accreditationId}",
+      "declared_route": "/api/v{version:apiVersion}/OverseasAccreditationSite/{accreditationId}",
+      "controller": "OverseasAccreditationSiteController",
+      "action": "Post",
+      "feature_gates": [
+        "EnableAccreditation"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Accreditation/OverseasAccreditationSiteController.cs",
+      "route_line": 30,
+      "action_line": 32,
+      "production_review_group": "exclude_accreditation",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Accreditation/OverseasAccreditationSiteController.cs#L30"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{registrationId}/carrier-broker-dealer-permits",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{registrationId}/carrier-broker-dealer-permits",
+      "controller": "CarrierBrokerDealerPermitsController",
+      "action": "GetCarrierBrokerDealerPermits",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/ExporterJourney/CarrierBrokerDealerPermitsController.cs",
+      "route_line": 20,
+      "action_line": 32,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/ExporterJourney/CarrierBrokerDealerPermitsController.cs#L20"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{registrationId}/carrier-broker-dealer-permits",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{registrationId}/carrier-broker-dealer-permits",
+      "controller": "CarrierBrokerDealerPermitsController",
+      "action": "CreateCarrierBrokerDealerPermits",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/ExporterJourney/CarrierBrokerDealerPermitsController.cs",
+      "route_line": 38,
+      "action_line": 52,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/ExporterJourney/CarrierBrokerDealerPermitsController.cs#L38"
+    },
+    {
+      "method": "PUT",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{registrationId}/carrier-broker-dealer-permits",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{registrationId}/carrier-broker-dealer-permits",
+      "controller": "CarrierBrokerDealerPermitsController",
+      "action": "UpdateCarrierBrokerDealerPermits",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/ExporterJourney/CarrierBrokerDealerPermitsController.cs",
+      "route_line": 74,
+      "action_line": 87,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/ExporterJourney/CarrierBrokerDealerPermitsController.cs#L74"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/countries",
+      "declared_route": "/api/v{version:apiVersion}/countries",
+      "controller": "CountriesController",
+      "action": "GetCountries",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Lookups/CountriesController.cs",
+      "route_line": 17,
+      "action_line": 20,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Lookups/CountriesController.cs#L17"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/materials",
+      "declared_route": "/api/v{version:apiVersion}/materials",
+      "controller": "MaterialController",
+      "action": "GetAllMaterials",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/MaterialController.cs",
+      "route_line": 19,
+      "action_line": 29,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/MaterialController.cs#L19"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/prn/{prnId}",
+      "declared_route": "/api/v{version:apiVersion}/prn/{prnId}",
+      "controller": "PrnController",
+      "action": "GetPrn",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnController.cs",
+      "route_line": 39,
+      "action_line": 42,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnController.cs#L39"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/prn/search/{page?}/{search?}/{filterBy?}/{sortBy?}",
+      "declared_route": "/api/v{version:apiVersion}/prn/search/{page?}/{search?}/{filterBy?}/{sortBy?}",
+      "controller": "PrnController",
+      "action": "GetSearchPrns",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnController.cs",
+      "route_line": 74,
+      "action_line": 78,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnController.cs#L74"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/prn/organisation",
+      "declared_route": "/api/v{version:apiVersion}/prn/organisation",
+      "controller": "PrnController",
+      "action": "GetAllPrnByOrganisationId",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnController.cs",
+      "route_line": 118,
+      "action_line": 120,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnController.cs#L118"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/prn/ModifiedPrnsbyDate",
+      "declared_route": "/api/v{version:apiVersion}/prn/ModifiedPrnsbyDate",
+      "controller": "PrnController",
+      "action": "GetModifiedPrnsbyDate",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnController.cs",
+      "route_line": 144,
+      "action_line": 148,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnController.cs#L144"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/prn/syncstatuses",
+      "declared_route": "/api/v{version:apiVersion}/prn/syncstatuses",
+      "controller": "PrnController",
+      "action": "GetSyncStatuses",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnController.cs",
+      "route_line": 164,
+      "action_line": 168,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnController.cs#L164"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/prn/obligationcalculation/{year}",
+      "declared_route": "/api/v{version:apiVersion}/prn/obligationcalculation/{year}",
+      "controller": "PrnController",
+      "action": "GetObligationCalculations",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnController.cs",
+      "route_line": 185,
+      "action_line": 189,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnController.cs#L185"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/prn/status",
+      "declared_route": "/api/v{version:apiVersion}/prn/status",
+      "controller": "PrnController",
+      "action": "UpdatePrnStatus",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnController.cs",
+      "route_line": 238,
+      "action_line": 243,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnController.cs#L238"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/prn/organisation/{submitterId}/calculate",
+      "declared_route": "/api/v{version:apiVersion}/prn/organisation/{submitterId}/calculate",
+      "controller": "PrnController",
+      "action": "CalculateAsync",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnController.cs",
+      "route_line": 301,
+      "action_line": 306,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnController.cs#L301"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/prn/prn-details",
+      "declared_route": "/api/v{version:apiVersion}/prn/prn-details",
+      "controller": "PrnController",
+      "action": "SaveAsync",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnController.cs",
+      "route_line": 416,
+      "action_line": 420,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnController.cs#L416"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/prn/updatesyncstatus",
+      "declared_route": "/api/v{version:apiVersion}/prn/updatesyncstatus",
+      "controller": "PrnController",
+      "action": "PeprToNpwdSyncedPrns",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnController.cs",
+      "route_line": 442,
+      "action_line": 446,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnController.cs#L442"
+    },
+    {
+      "method": "POST",
+      "api_version": "2.0",
+      "route": "/api/v2/prn",
+      "declared_route": "/api/v{version:apiVersion}/prn",
+      "controller": "PrnControllerV2",
+      "action": "SaveAsync",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnControllerV2.cs",
+      "route_line": 27,
+      "action_line": 31,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnControllerV2.cs#L27"
+    },
+    {
+      "method": "GET",
+      "api_version": "2.0",
+      "route": "/api/v2/prn/modified-prns",
+      "declared_route": "/api/v{version:apiVersion}/prn/modified-prns",
+      "controller": "PrnControllerV2",
+      "action": "GetModifiedPrns",
+      "feature_gates": [],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/PrnControllerV2.cs",
+      "route_line": 52,
+      "action_line": 56,
+      "production_review_group": "retain_prn",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/PrnControllerV2.cs#L52"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{applicationTypeId:int}/organisations/{organisationId:guid}",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{applicationTypeId:int}/organisations/{organisationId:guid}",
+      "controller": "RegistrationController",
+      "action": "GetRegistrationByOrganisation",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs",
+      "route_line": 26,
+      "action_line": 38,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs#L26"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations",
+      "declared_route": "/api/v{version:apiVersion}/registrations",
+      "controller": "RegistrationController",
+      "action": "CreateRegistration",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs",
+      "route_line": 60,
+      "action_line": 72,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs#L60"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{registrationId:guid}/update",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{registrationId:guid}/update",
+      "controller": "RegistrationController",
+      "action": "UpdateRegistration",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs",
+      "route_line": 81,
+      "action_line": 94,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs#L81"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{registrationId:guid}/taskStatus",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{registrationId:guid}/taskStatus",
+      "controller": "RegistrationController",
+      "action": "UpdateRegistrationTaskStatus",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs",
+      "route_line": 123,
+      "action_line": 134,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs#L123"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{registrationId:guid}/applicationTaskStatus",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{registrationId:guid}/applicationTaskStatus",
+      "controller": "RegistrationController",
+      "action": "UpdateApplicationRegistrationTaskStatus",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs",
+      "route_line": 146,
+      "action_line": 157,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs#L146"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{registrationId:guid}/siteAddress",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{registrationId:guid}/siteAddress",
+      "controller": "RegistrationController",
+      "action": "UpdateSiteAddress",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs",
+      "route_line": 170,
+      "action_line": 181,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs#L170"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{organisationId:guid}/overview",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{organisationId:guid}/overview",
+      "controller": "RegistrationController",
+      "action": "GetRegistrationsOverviewForOrgId",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs",
+      "route_line": 195,
+      "action_line": 206,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationController.cs#L195"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{registrationId:guid}/materials",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{registrationId:guid}/materials",
+      "controller": "RegistrationMaterialController",
+      "action": "GetAllRegistrationMaterials",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 32,
+      "action_line": 40,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L32"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/create",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/create",
+      "controller": "RegistrationMaterialController",
+      "action": "CreateRegistrationMaterial",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 52,
+      "action_line": 63,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L52"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{Id:guid}/createExemptionReferences",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{Id:guid}/createExemptionReferences",
+      "controller": "RegistrationMaterialController",
+      "action": "CreateExemptionReferences",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 72,
+      "action_line": 83,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L72"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{id:Guid}/permits",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{id:Guid}/permits",
+      "controller": "RegistrationMaterialController",
+      "action": "UpdateRegistrationMaterialPermits",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 91,
+      "action_line": 102,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L91"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{id:Guid}/permitCapacity",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{id:Guid}/permitCapacity",
+      "controller": "RegistrationMaterialController",
+      "action": "UpdateRegistrationMaterialPermitCapacity",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 116,
+      "action_line": 127,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L116"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/permitTypes",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/permitTypes",
+      "controller": "RegistrationMaterialController",
+      "action": "GetMaterialsPermitTypes",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 141,
+      "action_line": 150,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L141"
+    },
+    {
+      "method": "DELETE",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{registrationMaterialId:guid}",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{registrationMaterialId:guid}",
+      "controller": "RegistrationMaterialController",
+      "action": "DeleteRegistrationMaterial",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 158,
+      "action_line": 167,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L158"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/UpdateIsMaterialRegistered",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/UpdateIsMaterialRegistered",
+      "controller": "RegistrationMaterialController",
+      "action": "UpdateIsMaterialRegisteredAsync",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 179,
+      "action_line": 186,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L179"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{id:Guid}/contact",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{id:Guid}/contact",
+      "controller": "RegistrationMaterialController",
+      "action": "UpsertRegistrationMaterialContactAsync",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 195,
+      "action_line": 206,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L195"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{registrationMaterialId:Guid}/registrationReprocessingDetails",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{registrationMaterialId:Guid}/registrationReprocessingDetails",
+      "controller": "RegistrationMaterialController",
+      "action": "UpsertRegistrationReprocessingDetailsAsync",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 223,
+      "action_line": 234,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L223"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{registrationMaterialId:guid}/overseasReprocessingSites",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{registrationMaterialId:guid}/overseasReprocessingSites",
+      "controller": "RegistrationMaterialController",
+      "action": "SaveOverseasReprocessingSites",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 247,
+      "action_line": 258,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L247"
+    },
+    {
+      "method": "PUT",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{registrationMaterialId:guid}/max-weight",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{registrationMaterialId:guid}/max-weight",
+      "controller": "RegistrationMaterialController",
+      "action": "UpdateMaximumWeight",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 275,
+      "action_line": 286,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L275"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{registrationMaterialId:Guid}/materialNotReprocessingReason",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{registrationMaterialId:Guid}/materialNotReprocessingReason",
+      "controller": "RegistrationMaterialController",
+      "action": "UpdateMaterialNotReprocessingReasonAsync",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 296,
+      "action_line": 307,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L296"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{registrationMaterialId:guid}/overseasMaterialReprocessingSites",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{registrationMaterialId:guid}/overseasMaterialReprocessingSites",
+      "controller": "RegistrationMaterialController",
+      "action": "GetOverseasMaterialReprocessingSites",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 323,
+      "action_line": 331,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L323"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{registrationMaterialId:guid}/saveInterimSites",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{registrationMaterialId:guid}/saveInterimSites",
+      "controller": "RegistrationMaterialController",
+      "action": "SaveInterimSites",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs",
+      "route_line": 343,
+      "action_line": 353,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/RegistrationMaterialController.cs#L343"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{id}/accreditations",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{id}/accreditations",
+      "controller": "AccreditationController",
+      "action": "GetRegistrationByIdWithAccreditationsAsync",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/AccreditationMaterialController.cs",
+      "route_line": 23,
+      "action_line": 34,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/AccreditationMaterialController.cs#L23"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/accreditations/{Id}/samplingPlan",
+      "declared_route": "/api/v{version:apiVersion}/accreditations/{Id}/samplingPlan",
+      "controller": "AccreditationController",
+      "action": "GetSamplingPlan",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/AccreditationMaterialController.cs",
+      "route_line": 41,
+      "action_line": 52,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/AccreditationMaterialController.cs#L41"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/accreditations/{Id}/paymentFees",
+      "declared_route": "/api/v{version:apiVersion}/accreditations/{Id}/paymentFees",
+      "controller": "AccreditationController",
+      "action": "GetRegistrationAccreditationPaymentFeeDetailsById",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/AccreditationMaterialController.cs",
+      "route_line": 59,
+      "action_line": 70,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/AccreditationMaterialController.cs#L59"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/accreditations/{Id}/businessPlan",
+      "declared_route": "/api/v{version:apiVersion}/accreditations/{Id}/businessPlan",
+      "controller": "AccreditationController",
+      "action": "GetRegistrationAccreditationBusinessPlanById",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/AccreditationMaterialController.cs",
+      "route_line": 77,
+      "action_line": 88,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/AccreditationMaterialController.cs#L77"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/accreditations/{Id}/markAsDulyMade",
+      "declared_route": "/api/v{version:apiVersion}/accreditations/{Id}/markAsDulyMade",
+      "controller": "AccreditationController",
+      "action": "RegulatorAccreditationMarkAsDulyMade",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/AccreditationMaterialController.cs",
+      "route_line": 97,
+      "action_line": 108,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/AccreditationMaterialController.cs#L97"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{Id}",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{Id}",
+      "controller": "RegistrationMaterialController",
+      "action": "GetRegistrationOverviewDetailById",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 24,
+      "action_line": 35,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L24"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{Id}",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{Id}",
+      "controller": "RegistrationMaterialController",
+      "action": "GetMaterialDetailById",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 42,
+      "action_line": 53,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L42"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{Id}/wasteLicences",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{Id}/wasteLicences",
+      "controller": "RegistrationMaterialController",
+      "action": "GetWasteLicences",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 60,
+      "action_line": 64,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L60"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{Id}/reprocessingIO",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{Id}/reprocessingIO",
+      "controller": "RegistrationMaterialController",
+      "action": "GetReprocessingIO",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 71,
+      "action_line": 75,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L71"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{Id}/samplingPlan",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{Id}/samplingPlan",
+      "controller": "RegistrationMaterialController",
+      "action": "GetSamplingPlan",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 82,
+      "action_line": 86,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L82"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{Id}/siteAddress",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{Id}/siteAddress",
+      "controller": "RegistrationMaterialController",
+      "action": "GetRegistrationSiteAddressById",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 93,
+      "action_line": 104,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L93"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{Id}/wasteCarrier",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{Id}/wasteCarrier",
+      "controller": "RegistrationMaterialController",
+      "action": "GetWasteCarrierDetailsByRegistrationId",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 111,
+      "action_line": 122,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L111"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrations/{Id}/authorisedMaterials",
+      "declared_route": "/api/v{version:apiVersion}/registrations/{Id}/authorisedMaterials",
+      "controller": "RegistrationMaterialController",
+      "action": "GetAuthorisedMaterial",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 129,
+      "action_line": 140,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L129"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{Id}/paymentFees",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{Id}/paymentFees",
+      "controller": "RegistrationMaterialController",
+      "action": "GetRegistrationMaterialpaymentFeesById",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 146,
+      "action_line": 157,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L146"
+    },
+    {
+      "method": "GET",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{Id}/RegistrationAccreditationReference",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{Id}/RegistrationAccreditationReference",
+      "controller": "RegistrationMaterialController",
+      "action": "GetRegistrationAccreditationReference",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 163,
+      "action_line": 174,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L163"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{Id}/outcome",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{Id}/outcome",
+      "controller": "RegistrationMaterialController",
+      "action": "UpdateRegistrationOutcome",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 184,
+      "action_line": 195,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L184"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/registrationMaterials/{Id}/markAsDulyMade",
+      "declared_route": "/api/v{version:apiVersion}/registrationMaterials/{Id}/markAsDulyMade",
+      "controller": "RegistrationMaterialController",
+      "action": "RegistrationMaterialsMarkAsDulyMade",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs",
+      "route_line": 207,
+      "action_line": 218,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegistrationMaterialController.cs#L207"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/RegulatorAccreditationTaskStatus",
+      "declared_route": "/api/v{version:apiVersion}/RegulatorAccreditationTaskStatus",
+      "controller": "RegulatorAccreditationTaskStatusController",
+      "action": "UpdateAccreditationTaskStatus",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegulatorAccreditationTaskStatusController.cs",
+      "route_line": 21,
+      "action_line": 25,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegulatorAccreditationTaskStatusController.cs#L21"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/RegulatorApplicationTaskStatus",
+      "declared_route": "/api/v{version:apiVersion}/RegulatorApplicationTaskStatus",
+      "controller": "RegulatorApplicationTaskStatusController",
+      "action": "UpdateRegistrationTaskStatus",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegulatorApplicationTaskStatusController.cs",
+      "route_line": 22,
+      "action_line": 26,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegulatorApplicationTaskStatusController.cs#L22"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/RegulatorApplicationTaskStatus/{Id}/queryNote",
+      "declared_route": "/api/v{version:apiVersion}/RegulatorApplicationTaskStatus/{Id}/queryNote",
+      "controller": "RegulatorApplicationTaskStatusController",
+      "action": "AddApplicationTaskQueryNote",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegulatorApplicationTaskStatusController.cs",
+      "route_line": 36,
+      "action_line": 40,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegulatorApplicationTaskStatusController.cs#L36"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/RegulatorRegistrationTaskStatus",
+      "declared_route": "/api/v{version:apiVersion}/RegulatorRegistrationTaskStatus",
+      "controller": "RegulatorRegistrationTaskStatusController",
+      "action": "UpdateRegistrationTaskStatus",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegulatorRegistrationTaskStatusController.cs",
+      "route_line": 22,
+      "action_line": 26,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegulatorRegistrationTaskStatusController.cs#L22"
+    },
+    {
+      "method": "POST",
+      "api_version": "1.0",
+      "route": "/api/v1/RegulatorRegistrationTaskStatus/{Id}/queryNote",
+      "declared_route": "/api/v{version:apiVersion}/RegulatorRegistrationTaskStatus/{Id}/queryNote",
+      "controller": "RegulatorRegistrationTaskStatusController",
+      "action": "RegistrationTaskQueryNote",
+      "feature_gates": [
+        "ReprocessorExporter"
+      ],
+      "source_file": "src/EPR.PRN.Backend.API/Controllers/Regulator/RegulatorRegistrationTaskStatusController.cs",
+      "route_line": 36,
+      "action_line": 40,
+      "production_review_group": "disabled_reprocessor_exporter",
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Controllers/Regulator/RegulatorRegistrationTaskStatusController.cs#L36"
+    }
+  ],
+  "operational_endpoints": [
+    {
+      "method": "ANY (no method constraint)",
+      "route": "/admin/health",
+      "availability": "All environments; anonymous; SQL Server health check",
+      "source_line": 113,
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Startup.cs#L113"
+    },
+    {
+      "method": "GET",
+      "route": "/swagger/{documentName}/swagger.json",
+      "availability": "Development only; default Swagger route; documents depend on configuration",
+      "source_line": 103,
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Startup.cs#L103"
+    },
+    {
+      "method": "GET",
+      "route": "/swagger, /swagger/index.html, /swagger/* (UI assets)",
+      "availability": "Development only; default Swagger UI prefix",
+      "source_line": 104,
+      "source_url": "https://github.com/DEFRA/epr-prn-common-backend/blob/c1c250c08da94663a64dc84eb7b18c23ad9b9c5c/src/EPR.PRN.Backend.API/Startup.cs#L104"
+    }
+  ],
+  "environment_configuration": {
+    "repository": "epr-app-config-settings",
+    "commit": "4e1bdfe779ca771434f7675e678f878044c2c980",
+    "service": "RWDWEBWAx418",
+    "basis": "Checked-in configuration plus audited API defaults, not a live Azure snapshot. Assumes deployed application matches audited source and no additional overrides.",
+    "environments": [
+      {
+        "environment": "DEV1",
+        "config_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": true,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+            "source_line": 33,
+            "raw_environment_value": true
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "Token resolved from development.yaml; no environment override found",
+            "source_file": "epr-app-config-settings/pipelines/vars/development.yaml",
+            "source_line": 158,
+            "raw_environment_value": "#{{ featureManagement.EnableAccreditation }}"
+          }
+        },
+        "actions_enabled_by_feature_gates": 74,
+        "actions_disabled_by_feature_gates": 0
+      },
+      {
+        "environment": "DEV2",
+        "config_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": true,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+            "source_line": 33,
+            "raw_environment_value": true
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "Token resolved from development.yaml; no environment override found",
+            "source_file": "epr-app-config-settings/pipelines/vars/development.yaml",
+            "source_line": 158,
+            "raw_environment_value": "#{{ featureManagement.EnableAccreditation }}"
+          }
+        },
+        "actions_enabled_by_feature_gates": 74,
+        "actions_disabled_by_feature_gates": 0
+      },
+      {
+        "environment": "DEV3",
+        "config_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": true,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+            "source_line": 33,
+            "raw_environment_value": true
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "Token resolved from development.yaml; no environment override found",
+            "source_file": "epr-app-config-settings/pipelines/vars/development.yaml",
+            "source_line": 158,
+            "raw_environment_value": "#{{ featureManagement.EnableAccreditation }}"
+          }
+        },
+        "actions_enabled_by_feature_gates": 74,
+        "actions_disabled_by_feature_gates": 0
+      },
+      {
+        "environment": "DEV4",
+        "config_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": true,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+            "source_line": 33,
+            "raw_environment_value": true
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "Token resolved from development.yaml; no environment override found",
+            "source_file": "epr-app-config-settings/pipelines/vars/development.yaml",
+            "source_line": 158,
+            "raw_environment_value": "#{{ featureManagement.EnableAccreditation }}"
+          }
+        },
+        "actions_enabled_by_feature_gates": 74,
+        "actions_disabled_by_feature_gates": 0
+      },
+      {
+        "environment": "DEV6",
+        "config_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": true,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+            "source_line": 33,
+            "raw_environment_value": true
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "Token resolved from development.yaml; no environment override found",
+            "source_file": "epr-app-config-settings/pipelines/vars/development.yaml",
+            "source_line": 158,
+            "raw_environment_value": "#{{ featureManagement.EnableAccreditation }}"
+          }
+        },
+        "actions_enabled_by_feature_gates": 74,
+        "actions_disabled_by_feature_gates": 0
+      },
+      {
+        "environment": "DEV7",
+        "config_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": true,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+            "source_line": 33,
+            "raw_environment_value": true
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "Token resolved from development.yaml; no environment override found",
+            "source_file": "epr-app-config-settings/pipelines/vars/development.yaml",
+            "source_line": 158,
+            "raw_environment_value": "#{{ featureManagement.EnableAccreditation }}"
+          }
+        },
+        "actions_enabled_by_feature_gates": 74,
+        "actions_disabled_by_feature_gates": 0
+      },
+      {
+        "environment": "DEV9",
+        "config_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": true,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+            "source_line": 33,
+            "raw_environment_value": true
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "Token resolved from development.yaml; no environment override found",
+            "source_file": "epr-app-config-settings/pipelines/vars/development.yaml",
+            "source_line": 158,
+            "raw_environment_value": "#{{ featureManagement.EnableAccreditation }}"
+          }
+        },
+        "actions_enabled_by_feature_gates": 74,
+        "actions_disabled_by_feature_gates": 0
+      },
+      {
+        "environment": "DEV14",
+        "config_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": true,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+            "source_line": 33,
+            "raw_environment_value": true
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "Token resolved from development.yaml; no environment override found",
+            "source_file": "epr-app-config-settings/pipelines/vars/development.yaml",
+            "source_line": 158,
+            "raw_environment_value": "#{{ featureManagement.EnableAccreditation }}"
+          }
+        },
+        "actions_enabled_by_feature_gates": 74,
+        "actions_disabled_by_feature_gates": 0
+      },
+      {
+        "environment": "DEV16",
+        "config_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": true,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/dev/DEVRWDWEBWAX418.json",
+            "source_line": 33,
+            "raw_environment_value": true
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "Token resolved from development.yaml; no environment override found",
+            "source_file": "epr-app-config-settings/pipelines/vars/development.yaml",
+            "source_line": 158,
+            "raw_environment_value": "#{{ featureManagement.EnableAccreditation }}"
+          }
+        },
+        "actions_enabled_by_feature_gates": 74,
+        "actions_disabled_by_feature_gates": 0
+      },
+      {
+        "environment": "DEV8",
+        "config_file": "epr-app-config-settings/dev8/DEVRWDWEBWA8418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": true,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/dev8/DEVRWDWEBWA8418.json",
+            "source_line": 28,
+            "raw_environment_value": true
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "API default; absent from environment JSON",
+            "source_file": "epr-prn-common-backend/src/EPR.PRN.Backend.API/appsettings.json",
+            "source_line": 20,
+            "raw_environment_value": null
+          }
+        },
+        "actions_enabled_by_feature_gates": 74,
+        "actions_disabled_by_feature_gates": 0
+      },
+      {
+        "environment": "DEV15",
+        "config_file": "epr-app-config-settings/dev15/DEVRWDWEBWAF418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": true,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/dev15/DEVRWDWEBWAF418.json",
+            "source_line": 28,
+            "raw_environment_value": true
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "API default; absent from environment JSON",
+            "source_file": "epr-prn-common-backend/src/EPR.PRN.Backend.API/appsettings.json",
+            "source_line": 20,
+            "raw_environment_value": null
+          }
+        },
+        "actions_enabled_by_feature_gates": 74,
+        "actions_disabled_by_feature_gates": 0
+      },
+      {
+        "environment": "TST1",
+        "config_file": "epr-app-config-settings/tst1/TSTRWDWEBWA1418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": false,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/tst1/TSTRWDWEBWA1418.json",
+            "source_line": 23,
+            "raw_environment_value": false
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "API default; absent from environment JSON",
+            "source_file": "epr-prn-common-backend/src/EPR.PRN.Backend.API/appsettings.json",
+            "source_line": 20,
+            "raw_environment_value": null
+          }
+        },
+        "actions_enabled_by_feature_gates": 24,
+        "actions_disabled_by_feature_gates": 50
+      },
+      {
+        "environment": "PRE1",
+        "config_file": "epr-app-config-settings/pre1/PRERWDWEBWA1418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": false,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/pre1/PRERWDWEBWA1418.json",
+            "source_line": 23,
+            "raw_environment_value": false
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "API default; absent from environment JSON",
+            "source_file": "epr-prn-common-backend/src/EPR.PRN.Backend.API/appsettings.json",
+            "source_line": 20,
+            "raw_environment_value": null
+          }
+        },
+        "actions_enabled_by_feature_gates": 24,
+        "actions_disabled_by_feature_gates": 50
+      },
+      {
+        "environment": "PRE2",
+        "config_file": "epr-app-config-settings/pre2/PRERWDWEBWA2418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": false,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/pre2/PRERWDWEBWA2418.json",
+            "source_line": 23,
+            "raw_environment_value": false
+          },
+          "EnableAccreditation": {
+            "value": false,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/pre2/PRERWDWEBWA2418.json",
+            "source_line": 28,
+            "raw_environment_value": false
+          }
+        },
+        "actions_enabled_by_feature_gates": 12,
+        "actions_disabled_by_feature_gates": 62
+      },
+      {
+        "environment": "PRD1",
+        "config_file": "epr-app-config-settings/prd1/PRDRWDWEBWA1418.json",
+        "flags": {
+          "ReprocessorExporter": {
+            "value": false,
+            "origin": "Explicit environment setting",
+            "source_file": "epr-app-config-settings/prd1/PRDRWDWEBWA1418.json",
+            "source_line": 23,
+            "raw_environment_value": false
+          },
+          "EnableAccreditation": {
+            "value": true,
+            "origin": "API default; absent from environment JSON",
+            "source_file": "epr-prn-common-backend/src/EPR.PRN.Backend.API/appsettings.json",
+            "source_line": 20,
+            "raw_environment_value": null
+          }
+        },
+        "actions_enabled_by_feature_gates": 24,
+        "actions_disabled_by_feature_gates": 50
+      }
+    ],
+    "source": "Supplied Azure DevOps checkout; commit and repository-relative paths retained. Not the GitHub repository with the same name."
+  },
+  "production_review": {
+    "environment": "PRD1",
+    "focus": "Production endpoint retention for migration",
+    "configured_enabled_api_actions": 24,
+    "configured_disabled_api_actions": 50,
+    "live_deployment_verified": false,
+    "production_usage_verified": false,
+    "groups": [
+      {
+        "id": "retain_prn",
+        "title": "Group 1 — PRN endpoints: retain in the migration baseline",
+        "gate": null,
+        "decision": "Retain 12 PRN contracts. Executable callers and root journeys/jobs are mapped; PRD1 caller configuration supports the dependency. Live traffic remains unverified.",
+        "api_action_count": 12
+      },
+      {
+        "id": "exclude_accreditation",
+        "title": "Group 2 — Accreditation: not used in PRD1; exclude from migration baseline",
+        "gate": "EnableAccreditation",
+        "decision": "Accepted migration scope decision, supported by absent PRD1 settings for frontend 1416 and facade 1417 in the configuration snapshot.",
+        "api_action_count": 12
+      },
+      {
+        "id": "disabled_reprocessor_exporter",
+        "title": "Group 3 — Reprocessor/exporter endpoints: disabled in PRD1 configuration",
+        "gate": "ReprocessorExporter",
+        "decision": "These 50 actions are blocked by the explicit PRD1 ReprocessorExporter=false setting. Exclude them from the initial migration scope for enabled production functionality, subject to confirming deployed configuration and any planned enablement. This is not evidence that the code can be deleted or that these endpoints were never used.",
+        "api_action_count": 50
+      }
+    ],
+    "operational_decision": "Retain an equivalent health probe contract separately from business endpoints. Swagger is development-only in source and is not part of the production migration baseline.",
+    "migration_baseline_api_actions": 12,
+    "excluded_unused_accreditation_actions": 12,
+    "accreditation_scope_decision": {
+      "classification": "Not used in PRD1; exclude from migration baseline",
+      "basis": "Accepted migration scope decision, supported by absent PRD1 settings for frontend 1416 and facade 1417 in the configuration snapshot.",
+      "live_azure_verified": false,
+      "limitation": "Backend feature-default availability is unchanged. Known source callers exist; the overview upstream root remains unresolved."
+    },
+    "accreditation_caller_report": "github-accreditation-callers.md",
+    "prn_caller_report": "local-callers.md"
+  }
+}
